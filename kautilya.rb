@@ -9,6 +9,7 @@ require "./lib/src/methods"
 require "artii"
 #Config Variables. Separate class or file would be used if more are required.
 $output_path = File.expand_path(File.dirname(__FILE__))
+$capslock_status = "1"	# "2" mean On
 
 system("clear")
 puts"\n\n\n\n"
@@ -52,6 +53,10 @@ puts "3. Payloads for Mac OS X"
 puts "\n0. Exit Kautilya"
 target = input""
 if target == "1"
+puts "\n\nCapsLock status when input:"
+puts" 1. Off"
+puts" 2. On (When East Asian IME is default)"
+$capslock_status = input("")
 puts "\n\nChoose a payload category from the menu below:\n\n".bold
 puts" 1. Gather"
 puts" 2. Execute"

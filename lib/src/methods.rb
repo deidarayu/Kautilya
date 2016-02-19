@@ -33,9 +33,17 @@ def search_replace(filein,fileout,*param)
   input = input.gsub(/PERSDEFS/,"")
  end
  board = boardtype()
- teensydefsfile = File.read("./lib/src/methodsdefs")
+ if ($capslock_status == "2")
+  teensydefsfile = File.read("./lib/src/methoddefs_capson")
+ else
+  teensydefsfile = File.read("./lib/src/methodsdefs")
+ end
  input = input.gsub(/DEFS/,teensydefsfile)
  input = input.gsub(/BOARDTYPE/,board)
+ if ($capslock_status == "2")
+  regex = /(?!Keyboard\.print)(?=ln|)\(\"(.*)\"\)/i
+  input.gsub!(regex) {|m| m.swapcase()}
+ end
  file = File.new(fileout,"w")
  File.open(fileout,"w") {|f| f.puts input}
  file.close
